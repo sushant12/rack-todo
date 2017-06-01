@@ -1,6 +1,6 @@
  class Task
    # DB = PG.connect :hostaddr => "127.0.0.1", :port => 5432, :dbname => 'testdb', :user => "postgres", :password => "postgres"
-   DB = PG.connect :hostaddr => ENV['DATABASE_URL']
+   DB = PG.connect ENV['DATABASE_URL']
    # uncomment to create pg database
    # DB = PG.connect(hostaddr: "127.0.0.1", port: 5432, dbname: 'postgres', user: 'postgres', password: "postgres")
    DB.exec("CREATE DATABASE testdb")
