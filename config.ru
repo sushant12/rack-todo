@@ -8,7 +8,7 @@ require_relative 'app/models/task'
 
 use Rack::ContentLength
 use Rack::Reloader, 0
-
+use Todo::Router
 run Todo::Application
 # DB = SQLite3::Database.new "test.db"
 #uncomment it to create a table task

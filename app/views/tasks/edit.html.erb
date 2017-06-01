@@ -1,5 +1,5 @@
-<form method="post" action="/update">
-  Task Name: <input type="text" name="task">
-  Finished?: <input type="checkbox" name="finished" value="1">
+<form method="post" action="/update?id=<%= @task[0][0]%>">
+  Task Name: <input type="text" name="task" value="<%= @task[0][1] %>">
+  Finished?: <input type="checkbox" name="finished" value="1" <% if(@task[0][2] == 1) %> checked <% end%>>
   <input type="submit" value="Update" >
 </form>

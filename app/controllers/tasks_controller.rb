@@ -6,15 +6,23 @@ class TasksController < Todo::BaseController
   end
 
   def edit
+    @task = Task.where(params["id"])
+    render("tasks/edit")
   end
 
   def update
+    Task.update(params['task'], params['finished'], params['id'])
+    redirect_to '/'
   end
 
   def destroy
+    Task.delete(params['id'])
+    redirect_to '/'
   end
 
   def save
+    Task.save(params["task"])
+    redirect_to "/"
   end
 
 end
