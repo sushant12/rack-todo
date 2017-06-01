@@ -1,6 +1,6 @@
  class Task
    # DB = PG.connect :hostaddr => "127.0.0.1", :port => 5432, :dbname => 'testdb', :user => "postgres", :password => "postgres"
-   DB = PG.connect :hostaddr => ENV['Host'], :port => 5432, :dbname => ENV['Database'], :user => ENV['USER'], :password => ENV['Password']
+   DB = PG.connect :hostaddr => "ec2-23-23-234-118.compute-1.amazonaws.com", :port => 5432, :dbname => "d36njvcesv82u4", :user => "yjeezbwbynapsm", :password => "f9787c4977a0feb89e63c84427c7852336454741606704deed962909fbe7fb4d"
    # uncomment to create pg database
    # DB = PG.connect(hostaddr: "127.0.0.1", port: 5432, dbname: 'postgres', user: 'postgres', password: "postgres")
    # DB.exec("CREATE DATABASE testdb")
