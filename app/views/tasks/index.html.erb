@@ -1,0 +1,10 @@
+<form method="post" action="save_task">
+  Task Name: <input type="text" name="task">
+  <input type="submit" value="save" >
+</form>
+<h1>Tasks</h1>
+<ol>
+  <% @tasks.each do |task| %>
+      <li><%= task[1] %> <% if(task[2] == 1) %>(finished) <% end %><a href="/edit?id=<%= task[0]%>">edit </a>  <a href="/delete?id=<%= task[0]%>"> del</a></li>
+  <% end %>
+</ol>
