@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rack'
-gem 'sqlite3'
+gem 'pg'
 gem 'puma'
 gem 'tilt'
