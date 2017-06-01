@@ -1,6 +1,7 @@
 require 'erb'
 require "sqlite3"
 DB = SQLite3::Database.new "test.db"
+#uncomment it to create a table task
 # rows = db.execute <<-SQL
 #   create table tasks (
 #     name varchar(30),
