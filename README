@@ -1,12 +1,12 @@
-##A simple todo app in rack
+## A simple todo app in rack
 
 
-###How to make it work??
+### How to make it work??
 
 
 Clone the repo.
 
-install sqlite3 gem
+run `bundle install`
 
 
 run `rackup` in the project root dir
