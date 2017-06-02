@@ -1,13 +1,12 @@
 class TasksController < Todo::BaseController
-
   def index
     @tasks = Task.all
-    render("tasks/index")
+    render('tasks/index')
   end
 
   def edit
-    @task = Task.where(params["id"])
-    render("tasks/edit")
+    @task = Task.where(params['id'])
+    render('tasks/edit')
   end
 
   def update
@@ -21,8 +20,7 @@ class TasksController < Todo::BaseController
   end
 
   def save
-    Task.save(params["task"])
-    redirect_to "/"
+    Task.save(params['task'])
+    redirect_to '/'
   end
-
 end

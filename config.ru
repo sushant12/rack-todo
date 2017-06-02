@@ -13,7 +13,7 @@ use Todo::Router
 
 run Todo::Application
 # DB = SQLite3::Database.new "test.db"
-#uncomment it to create a table task
+# uncomment it to create a table task
 # rows = db.execute <<-SQL
 #   create table tasks (
 #     name varchar(30),

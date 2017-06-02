@@ -3,11 +3,11 @@ module Todo
     attr_reader :app
 
     ROUTES = {
-        '/' => {'controller' => 'tasks', 'action' => 'index'},
-        '/save_task' => {'controller' => 'tasks', 'action' => 'save'},
-        '/edit' => {'controller' => 'tasks', 'action' => 'edit'},
-        '/update' => {'controller' => 'tasks', 'action' => 'update'},
-        '/delete' => {'controller' => 'tasks', 'action' => 'destroy'}
+        '/' => { 'controller' => 'tasks', 'action' => 'index' },
+        '/save_task' => { 'controller' => 'tasks', 'action' => 'save' },
+        '/edit' => { 'controller' => 'tasks', 'action' => 'edit' },
+        '/update' => { 'controller' => 'tasks', 'action' => 'update' },
+        '/delete' => { 'controller' => 'tasks', 'action' => 'destroy' }
     }
 
     def initialize(app)

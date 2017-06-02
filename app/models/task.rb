@@ -1,7 +1,9 @@
  class Task
-   DB = PG.connect :hostaddr => "127.0.0.1", :port => 5432, :dbname => 'testdb', :user => "postgres", :password => "postgres"
-   #uncomment while deploying to heroku
-   #DB = PG.connect ENV["HEROKU_POSTGRESQL_SILVER_URL"]
+   DB = PG.connect hostaddr: '127.0.0.1', port: 5432, dbname: 'testdb', user: 'postgres', password: 'postgres'
+
+   # uncomment while deploying to heroku
+   # DB = PG.connect ENV["HEROKU_POSTGRESQL_SILVER_URL"]
+
    # uncomment to create pg database
    # DB = PG.connect(hostaddr: "127.0.0.1", port: 5432, dbname: 'postgres', user: 'postgres', password: "postgres")
    # DB.exec("CREATE DATABASE testdb")
@@ -11,8 +13,8 @@
    # DB.exec "CREATE TABLE tasks(Id SERIAL PRIMARY KEY, Name VARCHAR(20), Finished INT)"
 
    class << self
-     def all()
-       DB.exec("select * from tasks")
+     def all
+       DB.exec('select * from tasks')
      end
 
      def update(task, finish, id)
@@ -54,5 +56,4 @@
   #       DB.execute("select rowid, * from tasks where rowid = #{id}")
   #     end
   # end
-
  end
