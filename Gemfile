@@ -1,10 +1,11 @@
 source 'https://rubygems.org'
 
+gem 'activerecord', '~> 5.0', '>= 5.0.0.1'
 gem 'pg'
-gem 'puma'
-gem 'rack'
-gem 'rack-attack'
-gem 'tilt'
+# gem 'puma'
+# gem 'rack'
+# gem 'tilt'
+gem 'sinatra'
 
 group :development do
   gem 'brakeman', require: false
