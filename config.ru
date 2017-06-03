@@ -14,7 +14,7 @@ Bundler.require(:default)
 ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
 
 require_all 'app'
-
+configure { set :server, :puma }
 use TaskController
 
 run ApplicationController
