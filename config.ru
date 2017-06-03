@@ -11,7 +11,7 @@ Bundler.require(:default)
 # )
 
 # uncomment while deploying to heroku
-ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
+ActiveRecord::Base.establish_connection(ENV["HEROKU_POSTGRESQL_SILVER_URL"])
 
 require_all 'app'
 

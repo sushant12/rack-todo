@@ -27,8 +27,4 @@ class TaskController < ApplicationController
     task.save
     redirect '/'
   end
-
-  def test
-    "hello world"
-  end
 end
