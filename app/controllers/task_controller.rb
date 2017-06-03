@@ -1,6 +1,4 @@
 class TaskController < ApplicationController
-  set :views, Proc.new { File.join(root, "../views/") }
-
   get '/' do
     @tasks = Task.all
     erb :index
