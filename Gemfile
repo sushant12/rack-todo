@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'activerecord', '~> 5.0', '>= 5.0.0.1'
+gem 'activerecord', '~> 5.0', '>= 5.0.0.1', require: 'active_record'
 gem 'pg'
+gem 'require_all'
 # gem 'puma'
 # gem 'rack'
 # gem 'tilt'
