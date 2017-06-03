@@ -1,7 +1,0 @@
-<% @task.each do |val| %>
-<form method="post" action="/update?id=<%= val['id']%>">
-  Task Name: <input type="text" name="task" value="<%= val['name']%>">
-  Finished?: <input type="checkbox" name="finished" value="1" <% if(val['finished'].to_i == 1) %> checked <% end%>>
-  <input type="submit" value="Update" >
-</form>
-<% end %>
