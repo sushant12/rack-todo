@@ -15,8 +15,6 @@ ActiveRecord::Base.establish_connection(ENV["HEROKU_POSTGRESQL_SILVER_URL"])
 
 require_all 'app'
 
-configure { set :server, :puma }
-
 use TaskController
 
 run ApplicationController
