@@ -13,7 +13,6 @@ class TaskController < ApplicationController
   get '/delete/:id' do
     task = Task.find_by(id: params[:id])
     task.destroy
-    redirect '/'
   end
 
   get '/edit/:id' do

@@ -6,6 +6,6 @@
 <h1>Tasks</h1>
 <ol id="task-list">
   <% @tasks.each do |task|%>
-      <li id=<%= "#{task.name}-#{task.id}" %>><%= task.name %> <% if(task.finished == 1) %>(Finished) <% end %> <a href="/edit/<%= task.id %>">Edit</a> | <a href="/delete/<%= task.id%>">Del</a> </li>
+      <li id=<%= "#{task.name}-#{task.id}" %>><%= task.name %> <% if(task.finished == 1) %>(Finished) <% end %> <a href="/edit/<%= task.id %>">Edit</a> | <a class="del-task" href="/delete/<%= task.id%>">Del</a> </li>
   <% end %>
 </ol>
