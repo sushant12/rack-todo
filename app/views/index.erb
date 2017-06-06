@@ -1,11 +1,11 @@
-<form method="post" action="save">
+<form method="post">
   Name: <input type="text" name="task" id="new-task-name" onkeyup="checkEmpty();">
   <input type="submit" value="Save" id="save-new-task" disabled>
 </form>
 
 <h1>Tasks</h1>
-<ol>
+<ol id="task-list">
   <% @tasks.each do |task|%>
-      <li><%= task.name %> <% if(task.finished == 1) %>(Finished) <% end %> <a href="/edit/<%= task.id %>">Edit</a> | <a href="/delete/<%= task.id%>">Del</a> </li>
+      <li id=<%= "#{task.name}-#{task.id}" %>><%= task.name %> <% if(task.finished == 1) %>(Finished) <% end %> <a href="/edit/<%= task.id %>">Edit</a> | <a href="/delete/<%= task.id%>">Del</a> </li>
   <% end %>
 </ol>

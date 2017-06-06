@@ -5,8 +5,9 @@ class TaskController < ApplicationController
   end
 
   post '/save' do
-    Task.create(name: params[:task])
-    redirect '/'
+    content_type :json
+    task = Task.create(name: params[:task])
+    task.to_json
   end
 
   get '/delete/:id' do
@@ -25,6 +26,5 @@ class TaskController < ApplicationController
     task.name = params[:task]
     task.finished = params[:finished]
     task.save
-    redirect '/'
   end
 end
