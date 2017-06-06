@@ -1,6 +1,6 @@
 <form method="post" action="save">
-  Name: <input type="text" name="task">
-  <input type="submit" value="Save">
+  Name: <input type="text" name="task" id="new-task-name" onkeyup="checkEmpty();">
+  <input type="submit" value="Save" id="save-new-task" disabled>
 </form>
 
 <h1>Tasks</h1>
