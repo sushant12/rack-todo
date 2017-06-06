@@ -4,8 +4,20 @@
 </form>
 
 <h1>Tasks</h1>
+<div id="edit-form">
+	<form method="post">
+		<input type="text" id="task-id" value="" hidden>
+		Name: <input type="text" name="task" id="edit-task-name" value="">
+		Finished?: <input type="checkbox" name="finished" id="finished-task" value="1" >
+		<input type="submit" id="update-task" value="Update">
+	</form>
+</div>
 <ol id="task-list">
   <% @tasks.each do |task|%>
-      <li id=<%= "#{task.name}-#{task.id}" %>><%= task.name %> <% if(task.finished == 1) %>(Finished) <% end %> <a href="/edit/<%= task.id %>">Edit</a> | <a class="del-task" href="/delete/<%= task.id%>">Del</a> </li>
+      <li id=<%= "#{task.name}-#{task.id}" %>>
+      	<%= task.name %> <% if(task.finished == 1) %>(Finished) <% end %> 
+      	<a class="edit-task" href="/edit/<%= task.id %>">Edit</a> | 
+      	<a class="del-task" href="/delete/<%= task.id%>">Delete</a> 
+      </li>
   <% end %>
 </ol>

@@ -16,14 +16,17 @@ class TaskController < ApplicationController
   end
 
   get '/edit/:id' do
-    @task = Task.find_by(id: params[:id])
-    erb :edit
+    content_type :json
+    task = Task.find_by(id: params[:id])
+    task.to_json
   end
 
   post '/update/:id' do
+    content_type :json
     task = Task.find_by(id: params[:id])
     task.name = params[:task]
     task.finished = params[:finished]
     task.save
+    task.to_json
   end
 end
