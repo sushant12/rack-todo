@@ -10,12 +10,10 @@ var del_tasks = document.getElementsByClassName('del-task'),
     edit_tasks = document.getElementsByClassName('edit-task'),
     task_ref = "";
 
-for(var i =0; i < del_tasks.length; i++){
-    del_tasks[i].addEventListener('click',function(e){Todo.deleteTask(e);});
-}
-
+// number of edit and del tasks are same
 for(var i =0; i < edit_tasks.length; i++){
     edit_tasks[i].addEventListener('click',function(e){ Todo.editTask(e);});
+    del_tasks[i].addEventListener('click',function(e){Todo.deleteTask(e);});
 }
 
 Todo.checkEmpty = function (){
@@ -163,5 +161,3 @@ Todo.updateTask = function (e){
 	}
 	httpRequest.send("task="+edit_task_name+"&finished="+finished_value);
 }
-
-
