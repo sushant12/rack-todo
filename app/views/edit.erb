@@ -1,5 +1,0 @@
-<form method="post" action="/update/<%= @task.id%>">
-  Name: <input type="text" name="task" value="<%= @task.name%>">
-  Finished?: <input type="checkbox" name="finished" value="1" <% if(@task.finished == 1)%> checked <% end %> >
-  <input type="submit" value="Save">
-</form>

@@ -15,7 +15,7 @@
 <ol id="task-list">
   <% @tasks.each do |task|%>
       <li id=<%= "#{task.name}-#{task.id}" %>>
-      	<%= task.name %> <% if(task.finished == 1) %>(Finished) <% end %> 
+      	<%= task.name %> <% if(task.finished == 1) %>(Finished) <% end %>
       	<a class="edit-task" href="/edit/<%= task.id %>">Edit</a> | 
       	<a class="del-task" href="/delete/<%= task.id%>">Delete</a> 
       </li>

@@ -2,16 +2,13 @@ require 'rubygems'
 require 'bundler/setup'
 Bundler.require(:default)
 
-# ActiveRecord::Base.establish_connection(
-#   adapter:  'postgresql',
-#   host:     'localhost',
-#   username: 'postgres',
-#   password: 'postgres',
-#   database: 'testdb'
-# )
+configure :production do
+  require_relative 'config/environments/production'
+end
 
-# uncomment while deploying to heroku
-ActiveRecord::Base.establish_connection(ENV["HEROKU_POSTGRESQL_SILVER_URL"])
+configure :development do
+  require_relative 'config/environments/development'
+end
 
 require_all 'app'
 

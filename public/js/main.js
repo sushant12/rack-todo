@@ -125,7 +125,7 @@ function updateTask(event){
 	}
 
 	var httpRequest = new XMLHttpRequest();
-	httpRequest.open('POST', '/update/'+id, true);
+	httpRequest.open('POST', '/update/'+id);
 	httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	httpRequest.onreadystatechange = function() {
 		if(httpRequest.readyState == 4 && httpRequest.status == 200) {
@@ -158,6 +158,7 @@ function updateTask(event){
 			form.style.display = "none";
 		}
 	}
+	console.log(finished_value);
 	httpRequest.send("task="+edit_task_name+"&finished="+finished_value);
 
 }

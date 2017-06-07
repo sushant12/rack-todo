@@ -11,8 +11,12 @@ class TaskController < ApplicationController
   end
 
   get '/delete/:id' do
-    task = Task.find_by(id: params[:id])
-    task.destroy
+    begin
+      task = Task.find_by(id: params[:id])
+      task.destroy
+    rescue => e
+    end
+
   end
 
   get '/edit/:id' do
