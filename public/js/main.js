@@ -1,68 +1,69 @@
+document.getElementById("new-task-name").addEventListener('keyup', checkEmpty);
+document.getElementById("save-new-task").addEventListener('click', function(e){ makeRequest(e);});
+document.getElementById("update-task").addEventListener('click', function(e){ updateTask(e);});
+
 function checkEmpty(){
-	var task_length = document.getElementById("new-task-name").value.length;
+	var task_length = document.getElementById("new-task-name").value.length,
+        save_btn = document.getElementById("save-new-task");
 	if(task_length > 0)
 	{
-		document.getElementById("save-new-task").removeAttribute("disabled");
+        save_btn.removeAttribute("disabled");
 	}else{
-		document.getElementById("save-new-task").setAttribute("disabled","disabled");
+        save_btn.setAttribute("disabled","disabled");
 	}
 }
 
-// save
-document.getElementById("save-new-task").addEventListener('click', function makeRequest(event) {
-	event.preventDefault();
-	var param = document.getElementById("new-task-name").value;
-    var httpRequest = new XMLHttpRequest();
+function makeRequest(e) {
+    e.preventDefault();
+    var param = document.getElementById("new-task-name").value,
+        httpRequest = new XMLHttpRequest();
     httpRequest.open('POST', '/save', true);
     httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     httpRequest.onreadystatechange = function() {
-	    if(httpRequest.readyState == 4 && httpRequest.status == 200) {
-	      var res = JSON.parse(httpRequest.response);
-	      var ul = document.getElementById("task-list");
-		  var li = document.createElement("li");
-		  var a_edit = document.createElement("a");
-		  a_edit.setAttribute('href','/edit/'+res.id);
-		  a_edit.setAttribute("class","edit-task");
-		  a_edit.addEventListener("click",function(event){
-		  	editTask(event);
-		  }, false);
-		  a_edit.innerHTML = "Edit";
+        if(httpRequest.readyState == 4 && httpRequest.status == 200) {
+            var res = JSON.parse(httpRequest.response);
+            var ul = document.getElementById("task-list");
+            var li = document.createElement("li");
+            var a_edit = document.createElement("a");
+            a_edit.setAttribute('href','/edit/'+res.id);
+            a_edit.setAttribute("class","edit-task");
+            a_edit.addEventListener("click",function(event){
+                editTask(event);
+            }, false);
+            a_edit.innerHTML = "Edit";
 
-		  var a_del = document.createElement("a");
-		  a_del.setAttribute('href','/delete/'+res.id);
-		  a_del.setAttribute("class","del-task");
-		  a_del.addEventListener("click",function(event){
-		  	deleteTask(event);
-		  }, false);
-		  a_del.innerHTML = "Delete";
-		  li.appendChild(document.createTextNode(res.name+" "));
-		  li.appendChild(a_edit);
-		  li.appendChild(document.createTextNode(" | "));
-		  li.appendChild(a_del);
-		  li.setAttribute("id", res.name+"-"+res.id); 
-		  ul.appendChild(li);
-	    }
-	}
+            var a_del = document.createElement("a");
+            a_del.setAttribute('href','/delete/'+res.id);
+            a_del.setAttribute("class","del-task");
+            a_del.addEventListener("click",function(event){
+                deleteTask(event);
+            }, false);
+            a_del.innerHTML = "Delete";
+            li.appendChild(document.createTextNode(res.name+" "));
+            li.appendChild(a_edit);
+            li.appendChild(document.createTextNode(" | "));
+            li.appendChild(a_del);
+            li.setAttribute("id", res.name+"-"+res.id);
+            ul.appendChild(li);
+        }
+    }
     httpRequest.send("task="+param);
-});
+}
 
-// del task
 var del_tasks = document.getElementsByClassName('del-task');
 
 for(var i =0; i < del_tasks.length; i++){
-	del_tasks[i].addEventListener('click',function(event){
-		deleteTask(event);
-	});
+	del_tasks[i].addEventListener('click',function(e){deleteTask(e);});
 }
 
-function deleteTask(event){
-	event.preventDefault();
-	var param = event.currentTarget.href.split("/")[event.currentTarget.href.split("/").length -1];
+function deleteTask(e){
+	e.preventDefault();
+	var param = e.currentTarget.href.split("/")[e.currentTarget.href.split("/").length -1];
 	var httpRequest = new XMLHttpRequest();
 	httpRequest.open('GET', '/delete/'+param, true);
 	httpRequest.onreadystatechange = function() {
 		if(httpRequest.readyState == 4 && httpRequest.status == 200) {
-			var parent = event.target.parentNode
+			var parent = e.target.parentNode
 			var list = document.getElementById("task-list");
 			list.removeChild(parent);
 		}
@@ -70,22 +71,18 @@ function deleteTask(event){
 	httpRequest.send();
 }
 
-// edit task
 var edit_tasks = document.getElementsByClassName('edit-task');
 var task_ref = "";
 for(var i =0; i < edit_tasks.length; i++){
-	edit_tasks[i].addEventListener('click',function(event){
-		editTask(event);
-	});
+	edit_tasks[i].addEventListener('click',function(e){ editTask(e);});
 }
 
-function editTask(event)
-{
-	event.preventDefault();
+function editTask(e) {
+	e.preventDefault();
 	var form = document.getElementById("edit-form");
 	form.style.display = "block";
-	task_ref = event.target.parentElement;
-	var param = event.currentTarget.href.split("/")[event.currentTarget.href.split("/").length -1];
+	task_ref = e.target.parentElement;
+	var param = e.currentTarget.href.split("/")[e.currentTarget.href.split("/").length -1];
 	var httpRequest = new XMLHttpRequest();
 	var finished = document.getElementById('finished-task');
 	var finished_value = 0;
@@ -109,12 +106,8 @@ function editTask(event)
 	httpRequest.send();
 }
 
-document.getElementById("update-task").addEventListener('click', function(event){
-	updateTask(event);
-});
-
-function updateTask(event){
-	event.preventDefault();
+function updateTask(e){
+	e.preventDefault();
 	var edit_task_name = document.getElementById('edit-task-name').value;
 	var id = document.getElementById('task-id').value;
 	var finished = document.getElementById('finished-task');
@@ -125,7 +118,7 @@ function updateTask(event){
 	}
 
 	var httpRequest = new XMLHttpRequest();
-	httpRequest.open('POST', '/update/'+id);
+	httpRequest.open('POST', '/update/'+id, true);
 	httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	httpRequest.onreadystatechange = function() {
 		if(httpRequest.readyState == 4 && httpRequest.status == 200) {
@@ -158,9 +151,7 @@ function updateTask(event){
 			form.style.display = "none";
 		}
 	}
-	console.log(finished_value);
 	httpRequest.send("task="+edit_task_name+"&finished="+finished_value);
-
 }
 
 
