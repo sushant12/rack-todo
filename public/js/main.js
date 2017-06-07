@@ -6,9 +6,9 @@ document.getElementById("new-task-name").addEventListener('keyup', function(){ T
 document.getElementById("save-new-task").addEventListener('click', function(e){ Todo.makeRequest(e);});
 document.getElementById("update-task").addEventListener('click', function(e){ Todo.updateTask(e);});
 
-var del_tasks = document.getElementsByClassName('del-task');
-var edit_tasks = document.getElementsByClassName('edit-task');
-var task_ref = "";
+var del_tasks = document.getElementsByClassName('del-task'),
+    edit_tasks = document.getElementsByClassName('edit-task'),
+    task_ref = "";
 
 for(var i =0; i < del_tasks.length; i++){
     del_tasks[i].addEventListener('click',function(e){Todo.deleteTask(e);});
@@ -28,6 +28,7 @@ Todo.checkEmpty = function (){
 	}
 };
 
+// saves to db
 Todo.makeRequest = function (e) {
     e.preventDefault();
     var task_name = document.getElementById("new-task-name").value,
@@ -81,6 +82,7 @@ Todo.deleteTask = function (e){
 	httpRequest.send();
 }
 
+// fetch from db to show value in the form
 Todo.editTask = function (e) {
 	e.preventDefault();
 	var form = document.getElementById("edit-form"),
@@ -111,6 +113,7 @@ Todo.editTask = function (e) {
 	httpRequest.send();
 }
 
+// updates the db
 Todo.updateTask = function (e){
 	e.preventDefault();
 	var edit_task_name = document.getElementById('edit-task-name').value,
