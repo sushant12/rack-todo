@@ -67,9 +67,10 @@ Todo.makeRequest = function (e) {
 
 Todo.deleteTask = function (e){
 	e.preventDefault();
-	var param = e.currentTarget.href.split("/")[e.currentTarget.href.split("/").length -1],
+	var id = e.currentTarget.href.split("/")[e.currentTarget.href.split("/").length -1],
 	    httpRequest = new XMLHttpRequest();
-	httpRequest.open('GET', '/delete/'+param, true);
+	httpRequest.open('POST', '/delete', true);
+    httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	httpRequest.onreadystatechange = function() {
 		if(httpRequest.readyState == 4 && httpRequest.status == 200) {
 			var parent = e.target.parentNode,
@@ -77,7 +78,7 @@ Todo.deleteTask = function (e){
 			list.removeChild(parent);
 		}
 	}
-	httpRequest.send();
+	httpRequest.send("id="+id);
 }
 
 // fetch from db to show value in the form

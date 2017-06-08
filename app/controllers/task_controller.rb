@@ -10,7 +10,7 @@ class TaskController < ApplicationController
     task.to_json
   end
 
-  get '/delete/:id' do
+  post '/delete' do
     begin
       task = Task.find_by(id: params[:id])
       task.destroy
