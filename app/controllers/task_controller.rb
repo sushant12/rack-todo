@@ -1,12 +1,18 @@
 class TaskController < ApplicationController
   get '/' do
-    @tasks = Task.all
     erb :index
   end
 
-  post '/save' do
+  get '/tasks' do
     content_type :json
-    task = Task.create(name: params[:task])
+    tasks = Task.all
+    tasks.to_json
+  end
+
+  post '/save' do
+    puts "========"
+    puts params
+    task = Task.create(name: params[:name])
     task.to_json
   end
 
