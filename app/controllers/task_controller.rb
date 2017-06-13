@@ -15,6 +15,8 @@ class TaskController < ApplicationController
   end
 
   post '/delete' do
+    puts "======="
+    puts params
     begin
       task = Task.find_by(id: params[:id])
       task.destroy
