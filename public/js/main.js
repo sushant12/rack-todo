@@ -1,84 +1,71 @@
 "use strict";
 
-var Todo = {};
+var Task = {};
+var tasks = m.prop({});
+
+Task.list_task = function(){
+    return m.request({method: "GET", url: "/tasks"}).then(tasks);
+};
+
+Task.save_task = function(data){
+    return m.request({
+        method: "POST",
+        url: "/save",
+        data: data,
+        serialize: function(data) {
+            return data;
+        }
+    });
+};
 
 var app = document.getElementById('application');
-
-var Task = {};
-var Tasks = m.prop({});
-Task.listTasks = function(){
-  return m.request({method: "GET", url: "/tasks"}).then(Tasks);
-};
-Task.saveTask = function(data){
-    var xhrConfig = function(xhr) {
-        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
-        xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+var home_view = {
+  controller: function(){
+     var that = this;
+      that.tasks = Task.list_task();
+      that.save = function(data) {
+        Task.save_task(data).then(function(data){
+            that.tasks = Task.list_task();
+        });
     }
-  return m.request({
-      method: "POST",
-      url: "/save",
-      data: data,
-      serialize: function(data) {
-          return m.route.buildQueryString(data)
-      },
-      config: xhrConfig}).then(function(res){
-      console.log(res);
-  });
+  },
+   view: function(ctrl, args){
+       return [
+           m.component(task_form,{onsave: ctrl.save}),
+           m.component(task_list,{tasks: ctrl.tasks})
+       ]
+   }
 };
 
-var HomeView    = {
-    controller: function(){
-      this.tasks = Task.listTasks();
-      this.save = function(data){
-          Task.saveTask(data);
-      }
-    },
+var task_form = {
     view: function(ctrl, args){
-        return [
-            m.component(TaskForm,{onsave: ctrl.save}),
-            m.component(TaskList,{tasks: ctrl.tasks})
-        ]
-    }
-};
-
-var TaskForm = {
-    controller: function(){
-      this.task = m.prop("")
-    },
-    view: function(ctrl, args){
-        var task = ctrl.task();
-        return m('form[method=post]',[
-           m('label','Name: '),
-           m('input[type=text][name="task"]#new-task-name', {
-               oninput: m.withAttr("value", ctrl.task),
-               value: ctrl.task()
-           }),
-           m('button[type=button][disabled]#save-new-task',{
-               onclick: args.onsave.bind(this,task)
-           },"Save")
+       return m('form[method=post][action=/save]', {
+                onsubmit: function (e) {
+                    e.preventDefault();
+                    var form = document.querySelector("form");
+                    args.onsave(new FormData(form));
+                },
+            }, [
+            m('label[for=task]', 'Name: '),
+            m('input[type=text][name=task]#new-task-name'),
+            m('button[type=submit][disabled]#save-new-task', "Save")
         ]);
     }
-}
+};
 
-var TaskList = {
+var task_list = {
     view: function(ctrl, args){
         return m('#tasks-wrapper',[
             m("h1",'Tasks'),
             m("ol",[
                 args.tasks().map(function(task){
-                    return m(`li#${task.name}-${task.id}`,[
-                        `${task.name} `,
-                        m(`a[href="/edit/${task.id}"].edit-task`,'Edit'),
-                        " | ",
-                        m(`a[href="/delete/${task.id}"].del-task`,'Delete')
-                    ])
-                })
+                   return m(`li#${task.name}-${task.id}`,[
+                       `${task.name} `
+                   ])
+                }),
             ])
         ]);
     }
 };
 
-m.route.mode = 'pathname';
-m.route(app, '/', {
-    '/' : HomeView
-});
+m.mount(app,home_view);

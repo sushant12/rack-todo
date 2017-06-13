@@ -10,9 +10,7 @@ class TaskController < ApplicationController
   end
 
   post '/save' do
-    puts "========"
-    puts params
-    task = Task.create(name: params[:name])
+    task = Task.create(name: params[:task])
     task.to_json
   end
 
