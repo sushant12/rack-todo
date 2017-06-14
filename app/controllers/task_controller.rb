@@ -15,8 +15,6 @@ class TaskController < ApplicationController
   end
 
   post '/delete' do
-    puts "======="
-    puts params
     begin
       task = Task.find_by(id: params[:id])
       task.destroy
@@ -25,13 +23,17 @@ class TaskController < ApplicationController
 
   end
 
-  get '/edit/:id' do
+  get '/api/edit/:id' do
     content_type :json
     task = Task.find_by(id: params[:id])
     task.to_json
   end
 
-  post '/update/:id' do
+  get '/edit/:id' do
+    erb :edit
+  end
+
+  post '/update' do
     content_type :json
     task = Task.find_by(id: params[:id])
     task.name = params[:task]
