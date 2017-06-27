@@ -9,10 +9,10 @@ class TaskControllerTest < Test::Unit::TestCase
     OUTER_APP
   end
 
-  test "should return task list" do
-    get '/tasks'
-   	p last_response.body
-  end
+  # test "should return task list" do
+  #   get '/tasks'
+  #  	json_parse(last_response.body)
+  # end
 
   # test "should save tasks" do
   #   task = FactoryGirl.create(:task)

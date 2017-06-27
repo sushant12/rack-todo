@@ -17,10 +17,18 @@ class TaskTest < Test::Unit::TestCase
     assert_equal false, task.save
   end
 
-  test "should save task with title" do
-    task = FactoryGirl.build(:task)
+  test "should save task with title but no finished" do
+    task = FactoryGirl.build(:task, name: 'John')
     task.save
-    assert_equal "testinga again", task.reload.name
+    assert_equal "John", task.reload.name
+    assert_equal 0, task.reload.finished
+  end
+
+  test "should save task with title and finished" do
+    task = FactoryGirl.build(:task, name: 'John', finished: 1)
+    task.save
+    assert_equal "John", task.reload.name
+    assert_equal 1, task.reload.finished
   end
 
 end
