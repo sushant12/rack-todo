@@ -1,4 +1,5 @@
 require_relative File.expand_path '../../test_helper',__FILE__
+
 FactoryGirl.define do
   factory :task do
     name "testinga again"
@@ -16,10 +17,11 @@ class TaskTest < Test::Unit::TestCase
     assert_equal false, task.save
   end
 
-  test "should save tasks" do
-    task = FactoryGirl.create(:task)
-    assert_equal attributes_for(:task), task
-  end  
+  test "should save task with title" do
+    task = FactoryGirl.build(:task)
+    task.save
+    assert_equal "testinga again", task.reload.name
+  end
 
 end
 
