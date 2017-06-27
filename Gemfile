@@ -9,11 +9,12 @@ gem 'sinatra'
 group :development do
   gem 'brakeman', require: false
   gem 'rubocop', '~> 0.49.1', require: false
+  gem 'awesome_print', :require => 'ap'
+  gem 'byebug'
 end
 
 group :test do
-  gem 'rspec'
-  gem 'cucumber'
   gem 'test-unit'
   gem 'rack-test'
+  gem 'factory_girl'
 end
