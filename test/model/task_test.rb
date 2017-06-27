@@ -1,5 +1,4 @@
-require_relative '../test_helper'
-
+require_relative File.expand_path '../../test_helper',__FILE__
 FactoryGirl.define do
   factory :task do
     name "testinga again"
@@ -23,3 +22,4 @@ class TaskTest < Test::Unit::TestCase
   end  
 
 end
+

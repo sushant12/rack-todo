@@ -9,6 +9,9 @@ gem 'sinatra'
 group :development do
   gem 'brakeman', require: false
   gem 'rubocop', '~> 0.49.1', require: false
+end
+
+group :development , :test do
   gem 'awesome_print', :require => 'ap'
   gem 'byebug'
 end
