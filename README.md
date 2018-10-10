@@ -1,14 +1,24 @@
-## A simple todo app in rack
+# README
 
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-### How to make it work??
+Things you may want to cover:
 
+* Ruby version
 
-Clone the repo.
+* System dependencies
 
-run `bundle install`
+* Configuration
 
+* Database creation
 
-run `rackup` in the project root dir
+* Database initialization
 
+* How to run the test suite
 
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...

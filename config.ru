@@ -1,5 +1,5 @@
-require_relative 'boot.rb'
+# This file is used by Rack-based servers to start the application.
 
-use TaskController
+require_relative 'config/environment'
 
-run ApplicationController
+run Rails.application
